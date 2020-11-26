@@ -1,0 +1,27 @@
+section {
+    margin: 0;
+    height: 85%;
+}
+.user_profile_pic
+{
+    width: 70px;
+    height: 70px;
+}
+.grid_item
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button_group
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.popup_body
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
