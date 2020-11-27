@@ -1,6 +1,6 @@
 section {
     margin: 0;
-    height: 85%;
+    height: 86%;
 }
 .user_profile_pic
 {
@@ -24,4 +24,8 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.details_grids
+{
+    margin-top: 40px;
 }
