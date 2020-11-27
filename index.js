@@ -37,7 +37,7 @@ function generateContactItem(id, item){
                 <img class="user_profile_pic" src="./assets/profile.png">
                 <h3>${item.name}</h3>
             </a>
-            <a class="call_icon" href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop"></a>
+            <a class="call_icon" href="tel:${item.phone}" data-rel="popup" data-position-to="window" data-transition="pop"></a>
         </li>
     `;
 }
@@ -76,9 +76,11 @@ $(document).on('pagebeforeshow', '#HomeScreen', function(){
  * Before page load, we access content like header title, phone, email, ...etc  
  * then assign new values from data to it 
  */
-$(document).on('pagebeforeshow', '#ContactDetailsScreen', function(){       
+$(document).on('pagebeforeshow', '#ContactDetailsScreen', function(){
     $("#contactDetailsHeaderTitle").html(data[contactListObject.itemID].name);
     $("#phoneData").html(data[contactListObject.itemID].phone);
     $("#emailData").html(data[contactListObject.itemID].email);
     $("#genderData").html(data[contactListObject.itemID].gender);
+    //Add phone call feature
+    $("#phoneIcon").attr('href', `tel:${data[contactListObject.itemID].phone}`);
 });
