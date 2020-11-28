@@ -24,6 +24,15 @@ var data = [
 var contactListObject = {
     itemID : null
 }
+var AddContactForm = {
+    name: '',
+}
+
+jQuery.validator.setDefaults({
+    errorPlacement: function(error, element) {
+        error.appendTo(element.parent().parent().after());
+    }
+});
 
 /*
 function to create a contact item 
@@ -42,17 +51,22 @@ function generateContactItem(id, item){
     `;
 }
 
-/**
- * Make sure element body is empty before adding contact list
- */
-$('#contactList').empty();
+function appendContactListToHome(){
+    /**
+     * Make sure element body is empty before adding contact list
+     */
+    $('#contactList').empty();
 
-/**
- * Loop on each contact item and append it to element with contactList id
- */
-$.each(data, function(i, item){
-    $('#contactList').append(generateContactItem(i, item));
-});
+    /**
+     * Loop on each contact item and append it to element with contactList id
+     */
+    $.each(data, function(i, item){
+        $('#contactList').append(generateContactItem(i, item));
+    });
+    $('#contactList').listview().listview('refresh');
+}
+
+appendContactListToHome();
 
 /**
  * We get each anchor id by looping through li and access anchor tag
@@ -84,3 +98,33 @@ $(document).on('pagebeforeshow', '#ContactDetailsScreen', function(){
     //Add phone call feature
     $("#phoneIcon").attr('href', `tel:${data[contactListObject.itemID].phone}`);
 });
+
+/**
+ * Get data from array by using serializeArray()
+ * Get contact data from array then add it to addFormObject
+ * Add data to array of data
+ * then call append to refresh Home screen
+ * then navigate to Home screen
+ */
+function onSubmit(e){
+    //get the event so we can prevent
+    e.preventDefault();
+    if($('#addContactForm').valid()){
+        var addFormArray = $('#addContactForm').serializeArray();
+        var i;
+        var addFormObject = {};
+        for(i = 0; i < addFormArray.length; i++){
+            addFormObject = {
+                ...addFormObject,
+                [addFormArray[i].name]: addFormArray[i].value
+            }
+        }
+        data = [
+            ...data,
+            addFormObject
+        ];
+        console.log(data);
+        appendContactListToHome();
+        $.mobile.changePage( "#HomeScreen");
+    };
+}

@@ -8,12 +8,14 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"> </script>
 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 	<link rel="stylesheet" href="./styles.css"/>
 </head>
 <body>
 	<section data-role="page" id="HomeScreen" data-theme="a">
 		<header data-role="header" data-position="inline">
-			<a href="#page_three" class="ui-btn ui-btn-inline ui-icon-plus ui-btn-icon-left">Add</a>
+			<a href="#AddContactScreen" class="ui-btn ui-btn-inline ui-icon-plus ui-btn-icon-left">Add</a>
 			<h1>Contact List</h1>
 		</header>
 		<section data-role="content" data-theme="a">
@@ -46,7 +48,7 @@
 						</div>
 					</div>
 				</div>
-				<a href="#page_three" class="ui-btn ui-btn-icon-right ui-icon-edit"></a>
+				<a href="#UpdateContactScreen" class="ui-btn ui-btn-icon-right ui-icon-edit"></a>
 				<a href="#" class="ui-btn ui-btn-icon-right ui-icon-phone" id="phoneIcon"></a>
 			</div>
 			<div class="ui-grid-a details_grids">
@@ -62,24 +64,60 @@
 			<h1>Contact List</h1>
 		</footer>
 	</section>
-	<section data-role="page" id="page_three" data-theme="a">
+	<section data-role="page" id="AddContactScreen" data-theme="a">
 		<header data-role="header" data-position="inline">
 			<a href="#HomeScreen" class="ui-btn ui-btn-inline ui-icon-carat-l ui-btn-icon-left">Back</a>
 			<h1>New Contact</h1>
 		</header>
 		<section data-role="content" data-theme="a">
-			<form action="" methods="post" name="contact_form">
+			<form action="" methods="post" name="add_contact_form" id="addContactForm" onsubmit="onSubmit(event)">
+				<div class="ui-field-contain">
+					<label for="name">Name</label>
+					<input type="text" name="name" id="name" placeholder="Enter name" value="" required>
+				</div>
+				<div class="ui-field-contain">
+					<label for="phone">Phone</label>
+					<input type="tel" name="phone" id="phone" placeholder="(202) 555-5555" value="" required>
+				</div>
+				<div class="ui-field-contain">
+					<label for="email">Email</label>
+					<input type="email" name="email" id="email" placeholder="Enter email" value="" required pattern="^\S+@\S+\.\S+$">
+				</div>
+				<div class="ui-field-contain">
+					<label for="gender">Gender</label>
+					<select name="gender" id="gender" data-role="slider">
+					    <option value="Male">Male</option>
+					    <option value="Female" selected="">Female</option>
+					</select>
+				</div>
+				<div class="ui-grid-b ui-responsive button_group">
+					<div class="ui-block-b"><input type="submit" data-icon="check" value="Save"></div>
+					<div class="ui-block-c"><input href="#ContactDetailsScreen" type="reset" data-icon="forbidden" value="Cancel"></div>
+				</div>
+			</form>	
+		</section>
+		<footer data-role="footer" data-position="inline">
+			<h1>New Contact</h1>
+		</footer>
+	</section>
+	<section data-role="page" id="UpdateContactScreen" data-theme="a">
+		<header data-role="header" data-position="inline">
+			<a href="#ContactDetailsScreen" class="ui-btn ui-btn-inline ui-icon-carat-l ui-btn-icon-left">Back</a>
+			<h1>Update Contact</h1>
+		</header>
+		<section data-role="content" data-theme="a">
+			<form action="" methods="post" name="contact_form"  id="contactForm">
 				<div class="ui-field-contain">
 					<label for="textinput-1">Name</label>
 					<input type="text" name="textinput-1" id="textinput-1" placeholder="Enter name" value="" required>
 				</div>
 				<div class="ui-field-contain">
 					<label for="textinput-1">Phone</label>
-					<input type="number" name="textinput-2" id="textinput-1" placeholder="(202) 555-5555" value="" required pattern="phone">
+					<input type="number" name="textinput-2" id="textinput-2" placeholder="(202) 555-5555" value="" required pattern="phone">
 				</div>
 				<div class="ui-field-contain">
 					<label for="textinput-1">Email</label>
-					<input type="email" name="textinput-3" id="textinput-1" placeholder="Enter email" value="" required pattern="(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$">
+					<input type="email" name="textinput-3" id="textinput-3" placeholder="Enter email" value="" required pattern="^\S+@\S+\.\S+$">
 				</div>
 				<div class="ui-field-contain">
 					<label for="textinput-1">Gender</label>

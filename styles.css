@@ -29,3 +29,9 @@ section {
 {
     margin-top: 40px;
 }
+.error{
+    color:red;
+    display:block;
+    width: 100% !important;
+    text-align: center;
+}
